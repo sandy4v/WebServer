@@ -15,7 +15,7 @@ pipeline {
 
                 // Clone the Git repository
                 git branch: 'main',
-                    url: 'https://github.com/sandy4v/WebServer.git'
+                    url: 'https://github.com/rahulwagh/devops-project-1.git'
 
                 sh "ls -lart"
             }
@@ -23,11 +23,11 @@ pipeline {
 
         stage('Terraform Init') {
                     steps {
-                        ithCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
-                        // dir('infra') {   
-                        sh 'echo "=================Terraform Init=================="'
-                        sh 'terraform init'
-                        
+                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
+                            dir('infra') {
+                            sh 'echo "=================Terraform Init=================="'
+                            sh 'terraform init'
+                        }
                     }
                 }
         }
@@ -37,11 +37,10 @@ pipeline {
                 script {
                     if (params.PLAN_TERRAFORM) {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
-                            // dir('infra') {
-
+                            dir('infra') {
                                 sh 'echo "=================Terraform Plan=================="'
                                 sh 'terraform plan'
-                            
+                            }
                         }
                     }
                 }
@@ -53,11 +52,10 @@ pipeline {
                 script {
                     if (params.APPLY_TERRAFORM) {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
-                            // dir('infra') {
-
+                            dir('infra') {
                                 sh 'echo "=================Terraform Apply=================="'
                                 sh 'terraform apply -auto-approve'
-                            
+                            }
                         }
                     }
                 }
@@ -69,11 +67,10 @@ pipeline {
                 script {
                     if (params.DESTROY_TERRAFORM) {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
-                            // dir('infra') {
-
+                            dir('infra') {
                                 sh 'echo "=================Terraform Destroy=================="'
                                 sh 'terraform destroy -auto-approve'
-                            
+                            }
                         }
                     }
                 }
