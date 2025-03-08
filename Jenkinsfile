@@ -26,7 +26,7 @@ pipeline {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
                             dir('infra') {
                             sh 'echo "=================Terraform Init=================="'
-                            sh 'terraform init'
+                            sh 'terraform init -reconfigure'
                         }
                     }
                 }
