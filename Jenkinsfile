@@ -15,7 +15,7 @@ pipeline {
 
                 // Clone the Git repository
                 git branch: 'main',
-                    url: 'https://github.com/rahulwagh/devops-project-1.git'
+                    url: 'https://github.com/sandy4v/WebServer.git'
 
                 sh "ls -lart"
             }
@@ -26,7 +26,7 @@ pipeline {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
                             dir('infra') {
                             sh 'echo "=================Terraform Init=================="'
-                            sh 'terraform init -reconfigure'
+                            sh 'terraform init'
                         }
                     }
                 }
