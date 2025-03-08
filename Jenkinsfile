@@ -23,12 +23,11 @@ pipeline {
 
         stage('Terraform Init') {
                     steps {
-                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
-                            // dir('infra') {
-                            dir('$WORKSPACE') {
-                            sh 'echo "=================Terraform Init=================="'
-                            sh 'terraform init'
-                        }
+                        ithCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
+                        // dir('infra') {   
+                        sh 'echo "=================Terraform Init=================="'
+                        sh 'terraform init'
+                        
                     }
                 }
         }
@@ -39,10 +38,10 @@ pipeline {
                     if (params.PLAN_TERRAFORM) {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
                             // dir('infra') {
-                            dir('$WORKSPACE') {
+
                                 sh 'echo "=================Terraform Plan=================="'
                                 sh 'terraform plan'
-                            }
+                            
                         }
                     }
                 }
@@ -55,10 +54,10 @@ pipeline {
                     if (params.APPLY_TERRAFORM) {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
                             // dir('infra') {
-                            dir('$WORKSPACE') {
+
                                 sh 'echo "=================Terraform Apply=================="'
                                 sh 'terraform apply -auto-approve'
-                            }
+                            
                         }
                     }
                 }
@@ -71,10 +70,10 @@ pipeline {
                     if (params.DESTROY_TERRAFORM) {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sandy-aws-tf-cli-creds']]){
                             // dir('infra') {
-                            dir('$WORKSPACE') {
+
                                 sh 'echo "=================Terraform Destroy=================="'
                                 sh 'terraform destroy -auto-approve'
-                            }
+                            
                         }
                     }
                 }
