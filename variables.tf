@@ -1,0 +1,5 @@
+variable "key_pair_name" {
+  description = "key_pair_name"
+  type        = string
+  default     = "EC2KP2024"
+}
