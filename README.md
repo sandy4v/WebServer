@@ -15,8 +15,12 @@ cd /Users/sandy4v/Desktop/Github/
 git clone https://github.com/sandy4v/WebServer.git  # This will create a local copy in a Folder called WebServer
 git status 
 git add .
-git commit -m "Commit message"  #committs code to the local repo
+git commit -m "Commit message"  #commits code to the local repo
 git push  #pushes changes to the remote git repo on Github
+git push origin <BranhName>
+git rm --cached <File/Folder name>
+Ex. git rm -r --cached .terraform*  # This removes all tracked files ( files added by mistake with git add . command)
+git rm -r --cached .DS_Store*
 ```
 
 ##      Terraform Build 
@@ -37,3 +41,16 @@ once built then stages can be run via "Run with Parameters"
 ## WebServer 
 A simple Linux EC2 instance will be launched in USE1 region
 Apache server installed and started with a simple html file using bootstrap script
+
+
+## Other Useful Commands
+
+### To install git for Mac
+```
+$ brew install git
+```
+
+### VS code Integration with Git
+https://www.youtube.com/watch?v=i_23KUAEtUM
+
+
